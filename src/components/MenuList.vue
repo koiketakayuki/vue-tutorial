@@ -1,8 +1,11 @@
 <template>
   <div class="menu-list">
-    <ul v-for="menu in menus">
-      <li>
-        <menu-row :menu="menu" :onMenuClick="onMenuClick"></menu-row>
+    <ul>
+      <li
+        is="menu-row"
+        v-for="menu in menus"
+        :menu="menu"
+        :onMenuClick="onMenuClick">
       </li>
     </ul>
   </div>
@@ -26,5 +29,9 @@ export default {
   background: #FFF;
   box-shadow: 0 2px 2px 0 #F1F1F1;
   word-break: break-all;
+}
+
+.no-border {
+  border: none;
 }
 </style>

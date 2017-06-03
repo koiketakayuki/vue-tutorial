@@ -1,9 +1,12 @@
 <template>
-  <div id="app">
-    <h2>{{ shop.name }}のメニュー一覧</h2>
+  <div class="container">
+    <h2 class="heading"><span class="inner">{{ shop.name }}のメニュー一覧</span></h2>
     <div v-for="(menus, category) in categorizedMenus">
-      <h3>{{ category }}</h3>
-      <menu-list v-for="(index, menu) in menus" :menus="menus" key="index"></menu-list>
+      <div>
+        <h3 class="menu-category">{{ category }}</h3>
+        <button class="button button--create">メニューを作成</button>
+      </div>
+      <menu-list :menus="menus" key="index"></menu-list>
     </div>
   </div>
 </template>
@@ -18,15 +21,32 @@ export default {
         name: 'エキテン整骨院'
       },
       categorizedMenus: {
-        'カイロプラティック': [{
-          name: 'test'
-        }],
-        '整体': [{
-          name: 'test2'
-        }],
-        '骨盤矯正': [{
-          name: 'test3'
-        }]
+        'カイロプラティック': [
+          {
+            name: 'test1',
+            price: 5300,
+            isTaxIncluded: true
+          },
+          {
+            name: 'test2'
+          }
+        ],
+        '整体': [
+          {
+            name: 'test2',
+            price: 5210,
+            isTaxIncluded: true
+          }
+        ],
+        '骨盤矯正': [
+          {
+            name: 'test3',
+            price: 3300,
+            isTaxIncluded: false
+          }
+        ],
+        'O脚':[],
+        'test':[]
       }
     };
   },
@@ -36,7 +56,12 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+p {
+  margin: 0;
+  padding: 0;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -47,4 +72,68 @@ li {
   padding: 0;
   list-style: none;
 }
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+.container {
+  margin: 50px 30px;
+}
+
+.heading {
+  position: relative;
+  margin-top: 30px;
+  border: solid 1px #ccc;
+  font-weight: bold;
+  font-size: 107.7%;
+
+  .inner {
+    display: block;
+    padding: 10px 15px 11px 16px;
+    border-top: 1px solid #fff;
+    background: #ececec;
+  }
+
+  &:after {
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    left: -1px;
+    display: block;
+    width: 7px;
+    background: #f00;
+    content: "";
+    background: #936744;
+  }
+}
+
+.menu-category {
+  color: #936744;
+  margin: 20px 0 10px;
+  padding-left: 26px;
+  min-height: 20px;
+  background: url(./assets/category.png?20150423) no-repeat 0 50%;
+  font-weight: bold;
+  font-size: 123.7%;
+}
+
+.button {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 8px 12px;
+  color: #fff;
+  border-style: none;
+
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
 </style>
