@@ -5,25 +5,36 @@
         <p class="menu-content__name">{{ menu.name }}</p>
         <p v-if="menu.price" class="menu-content__price">
           価格<span class="price">{{ menu.price | formatPrice }}</span>円
-          <span v-if="menu.isTaxIncluded">（税込）</span>
-          <span v-else>（税抜き）</span>
+          <span>{{ menu.isTaxIncluded ? '（税込）' : '（税抜き）' }}</span>
         </p>
-        <div class="menu-content__information">
+        <div class="menu-content__information-container">
+          <div class="information tag">
+            {{ categoryName }}
+          </div>
+          <div class="information">
+            写真：<span class="status">{{ menu.numberOfPhoto }}</span>枚
+          </div>
+          <div class="information">
+            説明：<span class="status">{{ menu.hasDescription ? '有' : '無' }}</span>
+          </div>
         </div>
       </div>
+      <!--
       <div class="button-container">
         <button class="button button--edit">編集</button>
         <button class="button button--delete">削除</button>
       </div>
+      -->
     </div>
     <div class="image-block">
+      <img src="http://www.img03.ekiten.jp/image_charge2/21/3727921/menu/s150_020170524143912.jpg" width="70" height="70" alt="">
     </div>
   </li>
 </template>
 
 <script>
 export default {
-  props: ['menu', 'onMenuClick'],
+  props: ['menu', 'onMenuClick', 'categoryName'],
   filters: {
     formatPrice: function(price) {
       let result = price.toString();
@@ -38,7 +49,7 @@ export default {
 }
 </script>
 
-<style style="scss">
+<style lang="scss">
 .menu-row {
   position: relative;
   padding: 13px 15px 14px;
@@ -88,8 +99,43 @@ export default {
   font-weight: bold;
 }
 
-.menu-content__information {
-  
+.menu-content__information-container {
+  color: #888;
+  letter-spacing: 0;
+  white-space: nowrap;
+  line-height: 1.1;
+
+  .information {
+    display: inline-block;
+    margin: 5px 0 0 10px;
+    padding-right: 9px;
+    border-right: solid 1px #ddd;
+    color: #888;
+    letter-spacing: 0;
+    white-space: nowrap;
+    line-height: 1.1;
+    
+    &:last-child {
+      padding-right: 0;
+      border-right: none;
+    }
+  }
+
+  .tag {
+    margin-right: 5px;
+    margin-left: 0;
+    padding: 0 3px;
+    border-right: none;
+    background: #a98569;
+    font-size: 10px;
+    color: #fff;
+    line-height: 1.6;
+  }
+}
+
+.status {
+  margin: 0 3px;
+  font-weight: bold;
 }
 
 .button-container {

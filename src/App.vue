@@ -4,9 +4,9 @@
     <div v-for="(menus, category) in categorizedMenus">
       <div>
         <h3 class="menu-category">{{ category }}</h3>
-        <button class="button button--create">メニューを作成</button>
+        <!--<button class="button button--create">メニューを作成</button>-->
       </div>
-      <menu-list :menus="menus" key="index"></menu-list>
+      <menu-list :menus="menus" :categoryName="category" key="index"></menu-list>
     </div>
   </div>
 </template>
@@ -23,26 +23,56 @@ export default {
       categorizedMenus: {
         'カイロプラティック': [
           {
-            name: 'test1',
+            name: 'aaaaa',
             price: 5300,
-            isTaxIncluded: true
+            isTaxIncluded: true,
+            numberOfPhoto: 10,
+            hasDescription: true,
+            index: 0
           },
           {
-            name: 'test2'
+            name: 'bbbbb',
+            numberOfPhoto: 1,
+            hasDescription: false,
+            index: 1
+          },
+          {
+            name: 'ccccc',
+            numberOfPhoto: 1,
+            hasDescription: false,
+            index: 2
+          },
+          {
+            name: 'ddddd',
+            numberOfPhoto: 1,
+            hasDescription: false,
+            index: 3
+          },
+          {
+            name: 'eeeee',
+            numberOfPhoto: 1,
+            hasDescription: false,
+            index: 4
           }
         ],
         '整体': [
           {
             name: 'test2',
             price: 5210,
-            isTaxIncluded: true
+            isTaxIncluded: true,
+            numberOfPhoto: 1,
+            hasDescription: false,
+            index: 0
           }
         ],
         '骨盤矯正': [
           {
             name: 'test3',
             price: 3300,
-            isTaxIncluded: false
+            isTaxIncluded: false,
+            numberOfPhoto: 1,
+            hasDescription: true,
+            index: 0
           }
         ],
         'O脚':[],
@@ -57,6 +87,10 @@ export default {
 </script>
 
 <style lang="scss">
+html > body {  
+    font-size: 12px;  
+}
+
 p {
   margin: 0;
   padding: 0;
@@ -81,6 +115,7 @@ h1, h2, h3, h4, h5 {
 
 .container {
   margin: 50px 30px;
+  width: 600px;
 }
 
 .heading {

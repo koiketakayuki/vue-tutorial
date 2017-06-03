@@ -2,10 +2,15 @@
   <div class="menu-list">
     <ul>
       <li
+        draggable="true"
         is="menu-row"
-        v-for="menu in menus"
+        v-for="menu in orderedMenus"
         :menu="menu"
-        :onMenuClick="onMenuClick">
+        :categoryName="categoryName"
+        :onMenuClick="onMenuClick"
+        @dragstart.native="dragStart(menu, $event)"
+        @dragend.native="dragEnd($event)"
+        @dragenter.native="dragEnter(menu)">
       </li>
     </ul>
   </div>
@@ -13,11 +18,38 @@
 
 <script>
 import MenuRow from './MenuRow.vue';
+import { orderBy } from 'lodash';
 
 export default {
-  props: ['menus', 'onMenuClick'],
+  props: ['menus', 'onMenuClick', 'categoryName'],
+  data() {
+    return {
+      draggingItem: null
+    }
+  },
+  computed: {
+    orderedMenus: function() {
+      return orderBy(this.menus, 'index');
+    }
+  },
   components: {
     MenuRow
+  },
+  methods: {
+    dragStart (menu, e) {
+      this.draggingItem = menu;
+      e.target.style.opacity = 0.5;
+    },
+    dragEnd (e) {
+      e.target.style.opacity = 1;
+    },
+    dragEnter (menu) {
+      if (menu.index !== this.draggingItem.index) {
+        const tempIndex = menu.index;
+        menu.index = this.draggingItem.index
+        this.draggingItem.index = tempIndex
+      }
+    }
   }
 }
 </script>
@@ -29,9 +61,5 @@ export default {
   background: #FFF;
   box-shadow: 0 2px 2px 0 #F1F1F1;
   word-break: break-all;
-}
-
-.no-border {
-  border: none;
 }
 </style>
