@@ -1,18 +1,22 @@
 <template>
   <div class="container">
     <h2 class="heading"><span class="inner">{{ shop.name }}のメニュー一覧</span></h2>
-    <div v-for="(menus, category) in categorizedMenus">
+    <div v-for="(menus, categoryName) in categorizedMenus">
       <div>
-        <h3 class="menu-category">{{ category }}</h3>
-        <!--<button class="button button--create">メニューを作成</button>-->
+        <h3 class="menu-category">{{ categoryName }}</h3>
+        <button class="button">メニューを作成</button>
       </div>
-      <menu-list :menus="menus" :categoryName="category" key="index"></menu-list>
+      <menu-list :menus="menus" :categoryName="categoryName" key="index"></menu-list>
     </div>
+    <delete-confirmation-dialog></delete-confirmation-dialog>
+    <manu-form></menu-form>
   </div>
 </template>
 
 <script>
 import MenuList from './components/MenuList.vue';
+import MenuFormDialog from './components/MenuFormDialog.vue';
+import DeleteConfirmationDialog from './components/DeleteConfirmationDialog.vue';
 
 export default {
   data() {
@@ -28,6 +32,7 @@ export default {
             isTaxIncluded: true,
             numberOfPhoto: 10,
             hasDescription: true,
+            isRecomendation: true,
             index: 0
           },
           {
@@ -160,15 +165,6 @@ h1, h2, h3, h4, h5 {
   font-weight: bold;
   padding: 8px 12px;
   color: #fff;
-  border-style: none;
-
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-}
-
-.button:hover {
-  opacity: 0.8;
 }
 
 </style>

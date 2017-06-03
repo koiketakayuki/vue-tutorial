@@ -7,7 +7,9 @@
         v-for="menu in orderedMenus"
         :menu="menu"
         :categoryName="categoryName"
-        :onMenuClick="onMenuClick"
+        :onMenuEdit="onMenuEdit"
+        :onMenuCopy="onMenuCopy"
+        :onMenuDelete="onMenuDelete"
         @dragstart.native="dragStart(menu, $event)"
         @dragend.native="dragEnd($event)"
         @dragenter.native="dragEnter(menu)">
@@ -21,7 +23,7 @@ import MenuRow from './MenuRow.vue';
 import { orderBy } from 'lodash';
 
 export default {
-  props: ['menus', 'onMenuClick', 'categoryName'],
+  props: ['menus', 'categoryName', 'onMenuEdit', 'onMenuCopy', 'onMenuDelete'],
   data() {
     return {
       draggingItem: null
@@ -42,9 +44,10 @@ export default {
     },
     dragEnd (e) {
       e.target.style.opacity = 1;
+      this.draggingItem = null;
     },
     dragEnter (menu) {
-      if (menu.index !== this.draggingItem.index) {
+      if (this.draggingItem && menu.index !== this.draggingItem.index) {
         const tempIndex = menu.index;
         menu.index = this.draggingItem.index
         this.draggingItem.index = tempIndex
