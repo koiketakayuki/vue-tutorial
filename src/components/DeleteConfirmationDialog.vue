@@ -35,7 +35,6 @@ export default {
   margin-right: 20px;
 }
 .delete-confirmation-dialog {
-  /* some styles to position the modal at the center of the page */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -48,24 +47,24 @@ export default {
 
   .delete-confirmation-dialog__header {
     text-align: left;
-    height: 20px;
-    padding: 5px 10px;
+    padding: 8px 10px;
     background-color: rgba(0, 0, 0, 0.1);
-    font-size: 14px;
+    font-size: 16px;
     color: rgba(0, 0, 0, 0.8);
   }
 
   .delete-confirmation-dialog__content {
     padding: 8px 16px;
+    font-size: 16px;
     
     .confirmation-text {
-      font-size: 22px;
+      font-size: 26px;
       text-overflow: ellipsis;
       overflow: hidden;
     }
 
     .actions {
-      padding: 10px;
+      padding: 20px 0 10px 0;
 
       .button--action {
         font-size: 16px;

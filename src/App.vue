@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2 class="heading"><span class="inner">{{ shop.name }}のメニュー一覧</span></h2>
+    <h2 class="heading" v-if="shop"><span class="inner">{{ shop.name }}のメニュー一覧</span></h2>
     <div v-for="(menus, categoryName) in categorizedMenus">
       <div>
         <h3 class="menu-category">{{ categoryName }}</h3>
@@ -8,8 +8,7 @@
       </div>
       <menu-list
         :menus="menus"
-        :categoryName="categoryName"
-        ></menu-list>
+        :categoryName="categoryName"></menu-list>
     </div>
     <menu-form-dialog></menu-form-dialog>
     <delete-confirmation-dialog></delete-confirmation-dialog>
@@ -23,90 +22,25 @@ import DeleteConfirmationDialog from './components/DeleteConfirmationDialog.vue'
 import store from './store';
 
 export default {
-  store,
-  data() {
-    return {
-      shop: {
-        name: 'エキテン整骨院'
-      },
-      categorizedMenus: {
-        'カイロプラティック': [
-          {
-            name: 'aaaaa',
-            price: 5300,
-            isTaxIncluded: true,
-            numberOfPhoto: 10,
-            hasDescription: true,
-            isRecomendation: true,
-            index: 0
-          },
-          {
-            name: 'bbbbb',
-            numberOfPhoto: 1,
-            hasDescription: false,
-            index: 1
-          },
-          {
-            name: 'ccccc',
-            numberOfPhoto: 1,
-            hasDescription: false,
-            index: 2
-          },
-          {
-            name: 'ddddd',
-            numberOfPhoto: 1,
-            hasDescription: false,
-            index: 3
-          },
-          {
-            name: 'eeeee',
-            numberOfPhoto: 1,
-            hasDescription: false,
-            index: 4
-          }
-        ],
-        '整体': [
-          {
-            name: 'test2',
-            price: 5210,
-            isTaxIncluded: true,
-            numberOfPhoto: 1,
-            hasDescription: false,
-            index: 0
-          }
-        ],
-        '骨盤矯正': [
-          {
-            name: 'test3',
-            price: 3300,
-            isTaxIncluded: false,
-            numberOfPhoto: 1,
-            hasDescription: true,
-            index: 0
-          }
-        ],
-        'O脚':[],
-        'test':[]
-      }
-    };
-  },
-  methods: {
-    onMenuEdit() {
-
+  computed: {
+    shop() {
+      return this.$store.state.shop;
     },
-    onMenuCopy() {
-
-    },
-    onMenuDelete() {
-
+    categorizedMenus() {
+      return this.$store.state.categorizedMenus;
     }
   },
+  store,
   components: {
     MenuList,
     MenuFormDialog,
     DeleteConfirmationDialog
   },
 }
+
+const shopId = 0;
+store.dispatch('getShop', shopId);
+store.dispatch('getCategorizedMenus', shopId);
 </script>
 
 <style lang="scss">
@@ -138,7 +72,6 @@ h1, h2, h3, h4, h5 {
 
 .container {
   margin: 50px 30px;
-  width: 600px;
 }
 
 .heading {
@@ -193,5 +126,9 @@ h1, h2, h3, h4, h5 {
   height: 100%;
   z-index: 10;
   background-color: rgba(0,0,0,0.5);
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 </style>

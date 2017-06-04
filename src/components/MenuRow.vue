@@ -19,16 +19,17 @@
       </div>
     </div>
     <div class="row-actions">
-      <span class="action" @click="onMenuView(menu)">閲覧</span>/
-      <span class="action" @click="onMenuEdit(menu)">編集</span>/
-      <span class="action" @click="onMenuCopy(menu)">コピー</span>/
-      <span class="action delete" @click="onMenuDelete(menu)">削除</span>
+      <span class="action" @click="window.open('http://www.ekiten.jp/shop_7125811/menu/menu_427888/')">閲覧</span>/
+      <span class="action" @click="goToEditMode(menu)">編集</span>/
+      <span class="action">コピー</span>/
+      <span class="action delete" @click="goToDeleteConfirmationMode(menu)">削除</span>
     </div>
   </li>
 </template>
 
 <script>
 import store from '../store';
+import { mapMutations } from 'vuex';
 
 export default {
   props: {
@@ -41,17 +42,7 @@ export default {
       required: true
     }
   },
-  methods: {
-    onMenuView(menu) {
-      window.open("http://www.ekiten.jp/shop_7125811/menu/menu_427888/");
-    },
-    onMenuEdit(menu) {
-      this.$store.commit('goToEditMode', menu);
-    },
-    onMenuDelete(menu) {
-      this.$store.commit('goToDeleteConfirmation', menu);
-    }
-  },
+  methods: mapMutations(['goToEditMode', 'goToDeleteConfirmationMode']),
   filters: {
     formatPrice: function(price) {
       let result = price.toString();
