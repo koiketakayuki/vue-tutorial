@@ -20,7 +20,7 @@ const store = new Vuex.Store({
       state.isEditMode = false;
       state.isDeleteConfimationMode = true;
     },
-    goToListPage(state) {
+    goToMenuList(state) {
       state.targetMenu = null;
       state.isEditMode = false;
       state.isDeleteConfimationMode = false;

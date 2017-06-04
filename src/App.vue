@@ -111,7 +111,7 @@ export default {
 
 <style lang="scss">
 html > body {  
-    font-size: 12px;  
+  font-size: 12px;  
 }
 
 p {
@@ -182,17 +182,16 @@ h1, h2, h3, h4, h5 {
   font-size: 12px;
   font-weight: bold;
   padding: 8px 12px;
-  color: #fff;
+  color: #888888;
 }
 
 .overlay {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #000000;
-  opacity: 0.5;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.5);
 }
 </style>

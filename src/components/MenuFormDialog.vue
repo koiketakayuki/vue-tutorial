@@ -1,8 +1,6 @@
 <template>
-  <div
-    class="overlay"
-    :class="{ 'is-edit-mode': isEditMode }"
-    @click.prevent="goToListPage">
+  <div v-if="isEditMode">
+    <div class="overlay"></div>
     test
   </div>
 </template>
@@ -17,7 +15,7 @@ export default {
     'isEditMode',
     'targetMenu'
   ]),
-  methods: mapMutations(['goToListPage'])
+  methods: mapMutations(['goToMenuList'])
 }
 </script>
 
