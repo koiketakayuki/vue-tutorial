@@ -22,5 +22,15 @@ export default {
   },
   receiveCategorizedMenus(state, categorizedMenus) {
     state.categorizedMenus = categorizedMenus;
+  },
+  deleteMenu(state, menu) {
+
+  },
+  displayInformation(state, information) {
+    state.information = information;
+    state.hasInformation = true;
+  },
+  closeInformation(state) {
+    state.hasInformation = false;
   }
 };

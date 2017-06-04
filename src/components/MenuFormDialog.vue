@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import store from '../store';
 import { mapState } from 'vuex';
 import { mapMutations } from 'vuex';
 

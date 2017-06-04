@@ -1,18 +1,16 @@
 <template>
-  <div class="menu-list">
-    <ul>
-      <li
-        draggable="true"
-        is="menu-row"
-        v-for="menu in orderedMenus"
-        :menu="menu"
-        :categoryName="categoryName"
-        @dragstart.native="dragStart(menu, $event)"
-        @dragend.native="dragEnd($event)"
-        @dragenter.native="dragEnter(menu)">
-      </li>
-    </ul>
-  </div>
+  <ul class="menu-list">
+    <li
+      draggable="true"
+      is="menu-row"
+      v-for="menu in orderedMenus"
+      :menu="menu"
+      :categoryName="categoryName"
+      @dragstart.native="dragStart(menu, $event)"
+      @dragend.native="dragEnd($event)"
+      @dragenter.native="dragEnter(menu)">
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -51,6 +49,7 @@ export default {
     dragEnd (e) {
       e.target.style.opacity = 1;
       this.draggingItem = null;
+      this.$store.dispatch('updateMenuOrder', this.menus);
     },
     dragEnter (menu) {
       if (this.draggingItem && menu.index !== this.draggingItem.index) {

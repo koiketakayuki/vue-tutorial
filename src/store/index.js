@@ -8,10 +8,12 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     menus: [],
-    categorizedMenus: [],
+    categorizedMenus: {},
     targetMenu: null,
     isEditMode: false,
-    isDeleteConfimationMode: false
+    isDeleteConfimationMode: false,
+    hasInformation: false,
+    information: null
   },
   mutations,
   actions

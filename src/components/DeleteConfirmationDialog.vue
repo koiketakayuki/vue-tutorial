@@ -8,7 +8,7 @@
       <div class="delete-confirmation-dialog__content">
         <p class="confirmation-text">{{ targetMenu.name }}</p>を削除しますか？
         <div class="actions">
-          <button class="button button--action button--delete mr-20" @click="goToMenuList">削除</button>
+          <button class="button button--action button--delete mr-20" @click="deleteMenu(targetMenu)">削除</button>
           <button class="button button--action" @click="goToMenuList">キャンセル</button>
         </div>
       </div>
@@ -17,16 +17,21 @@
 </template>
 
 <script>
-import store from '../store';
 import { mapState } from 'vuex';
-import { mapMutations } from 'vuex';
 
 export default {
   computed: mapState([
     'isDeleteConfimationMode',
     'targetMenu'
   ]),
-  methods: mapMutations(['goToMenuList'])
+  methods: {
+    goToMenuList() {
+      this.$store.commit('goToMenuList');
+    },
+    deleteMenu(menu) {
+      this.$store.dispatch('deleteMenu', menu);
+    }
+  }
 }
 </script>
 

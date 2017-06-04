@@ -22,6 +22,8 @@
     "node-sass": "^4.5.0",
     "sass-loader": "^5.0.1",
     "vue-loader": "^12.1.0",
+    "vue-mdl-snackbar": "^1.0.9",
+    "vue-snackbar": "^0.1.0",
     "vue-template-compiler": "^2.3.3",
     "vuex": "^2.3.1",
     "webpack": "^2.6.1",

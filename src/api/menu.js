@@ -68,5 +68,15 @@ export default {
     return new Promise((success, failure) => {
       success(menu);
     });
+  },
+  updateMenuOrder(updateMenus) {
+    return new Promise((success, failure) => {
+      failure(new Error('メニュー順の変更に失敗しました。一度ページを更新してやり直してください。'));
+    });
+  },
+  deleteMenu(menu) {
+    return new Promise((success, failure) => {
+      failure(new Error('メニューの削除に失敗しました。一度ページを更新してやり直してください。'));
+    });
   }
 };
