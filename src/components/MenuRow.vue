@@ -28,11 +28,28 @@
 </template>
 
 <script>
+import store from '../store';
+
 export default {
-  props: ['menu', 'categoryName', 'onMenuEdit', 'onMenuCopy', 'onMenuDelete'],
+  props: {
+    menu: {
+      type: Object,
+      required: true
+    },
+    categoryName: {
+      type: String,
+      required: true
+    }
+  },
   methods: {
-    onMenuView: function() {
+    onMenuView(menu) {
       window.open("http://www.ekiten.jp/shop_7125811/menu/menu_427888/");
+    },
+    onMenuEdit(menu) {
+      this.$store.commit('goToEditMode', menu);
+    },
+    onMenuDelete(menu) {
+      this.$store.commit('goToDeleteConfirmation', menu);
     }
   },
   filters: {

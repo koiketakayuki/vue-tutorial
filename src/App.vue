@@ -6,10 +6,13 @@
         <h3 class="menu-category">{{ categoryName }}</h3>
         <button class="button">メニューを作成</button>
       </div>
-      <menu-list :menus="menus" :categoryName="categoryName" key="index"></menu-list>
+      <menu-list
+        :menus="menus"
+        :categoryName="categoryName"
+        ></menu-list>
     </div>
+    <menu-form-dialog></menu-form-dialog>
     <delete-confirmation-dialog></delete-confirmation-dialog>
-    <manu-form></menu-form>
   </div>
 </template>
 
@@ -17,8 +20,10 @@
 import MenuList from './components/MenuList.vue';
 import MenuFormDialog from './components/MenuFormDialog.vue';
 import DeleteConfirmationDialog from './components/DeleteConfirmationDialog.vue';
+import store from './store';
 
 export default {
+  store,
   data() {
     return {
       shop: {
@@ -85,8 +90,21 @@ export default {
       }
     };
   },
+  methods: {
+    onMenuEdit() {
+
+    },
+    onMenuCopy() {
+
+    },
+    onMenuDelete() {
+
+    }
+  },
   components: {
-    MenuList
+    MenuList,
+    MenuFormDialog,
+    DeleteConfirmationDialog
   },
 }
 </script>
@@ -167,4 +185,14 @@ h1, h2, h3, h4, h5 {
   color: #fff;
 }
 
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.5;
+}
 </style>
