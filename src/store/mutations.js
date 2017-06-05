@@ -20,11 +20,15 @@ export default {
   receiveShop(state, shop) {
     state.shop = shop;
   },
-  receiveCategorizedMenus(state, categorizedMenus) {
-    state.categorizedMenus = categorizedMenus;
+  receiveMenus(state, menus) {
+    state.menus = menus;
   },
   deleteMenu(state, menu) {
+    const index = state.menus.findIndex(m => m.id === menu.id);
 
+    if (index >= 0) {
+      state.menus.splice(index, 1);
+    }
   },
   displayInformation(state, information) {
     state.information = information;

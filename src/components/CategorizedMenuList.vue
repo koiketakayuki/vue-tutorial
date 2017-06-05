@@ -3,11 +3,11 @@
     <div v-for="(menus, categoryName) in categorizedMenus">
         <div>
         <h3 class="menu-category">{{ categoryName }}</h3>
-        <button class="button">メニューを作成</button>
+        <button class="button button--plus"><span>+</span>メニューの追加</button>
         </div>
         <menu-list
-        :menus="menus"
-        :categoryName="categoryName"></menu-list>
+          :menus="menus"
+          :categoryName="categoryName"></menu-list>
     </div>
   </div>
 </template>
@@ -27,3 +27,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.button--plus {
+  font-size: 20px;
+  content: '+'
+}
+</style>

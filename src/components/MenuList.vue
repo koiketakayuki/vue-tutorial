@@ -47,9 +47,11 @@ export default {
       e.target.style.opacity = 0.5;
     },
     dragEnd (e) {
-      e.target.style.opacity = 1;
-      this.draggingItem = null;
-      this.$store.dispatch('updateMenuOrder', this.menus);
+      if (this.draggingItem) {
+        e.target.style.opacity = 1;
+        this.draggingItem = null;
+        this.$store.dispatch('updateMenuOrder', this.menus);
+      }
     },
     dragEnter (menu) {
       if (this.draggingItem && menu.index !== this.draggingItem.index) {

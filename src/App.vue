@@ -4,7 +4,10 @@
     <categorized-menu-list :categorizedMenus="categorizedMenus"></categorized-menu-list>
     <menu-form-dialog></menu-form-dialog>
     <delete-confirmation-dialog></delete-confirmation-dialog>
-    <div class="snackbar" :class="{ active: hasInformation }">{{ information }}<button class="action" @click="cloceSnackbar">閉じる</button></div>
+    <div class="snackbar" :class="{ active: hasInformation }">
+      {{ information }}
+      <button class="action" @click="closeSnackbar">閉じる</button>
+    </div>
   </div>
 </template>
 
@@ -13,6 +16,7 @@ import CategorizedMenuList from './components/CategorizedMenuList.vue';
 import MenuFormDialog from './components/MenuFormDialog.vue';
 import DeleteConfirmationDialog from './components/DeleteConfirmationDialog.vue';
 import store from './store';
+import { groupBy } from 'lodash';
 
 export default {
   computed: {
@@ -20,7 +24,7 @@ export default {
       return this.$store.state.shop;
     },
     categorizedMenus() {
-      return this.$store.state.categorizedMenus;
+      return _.groupBy(this.$store.state.menus, 'category');
     },
     hasInformation() {
       return this.$store.state.hasInformation;
@@ -36,7 +40,7 @@ export default {
     DeleteConfirmationDialog
   },
   methods: {
-    cloceSnackbar() {
+    closeSnackbar() {
       this.$store.commit('closeInformation');
     }
   }
@@ -44,7 +48,7 @@ export default {
 
 const shopId = 0;
 store.dispatch('getShop', shopId);
-store.dispatch('getCategorizedMenus', shopId);
+store.dispatch('getMenus', shopId);
 </script>
 
 <style lang="scss">
@@ -76,6 +80,7 @@ h1, h2, h3, h4, h5 {
 
 .container {
   margin: 50px 30px;
+  width: 600px;
 }
 
 .heading {

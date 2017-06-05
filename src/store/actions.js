@@ -1,15 +1,12 @@
 import ShopAPI from '../api/shop';
 import MenuAPI from '../api/menu';
-function closeInformation(commit) {
-  setTimeout(() => commit('closeInformation'), 5000);
-}
 
 export default {
   getShop({ commit }, shopId) {
     return ShopAPI.getShop(shopId).then(shop => commit('receiveShop', shop));
   },
-  getCategorizedMenus({ commit }, shopId) {
-    return MenuAPI.getCategorizedMenus(shopId).then(categorizedMenus => commit('receiveCategorizedMenus', categorizedMenus));
+  getMenus({ commit }, shopId) {
+    return MenuAPI.getMenus(shopId).then(menus => commit('receiveMenus', menus));
   },
   getDetailedMenu(targetMenu) {
     return MenuAPI.getDetailedMenu(targetMenu);
@@ -26,7 +23,6 @@ export default {
       })
       .catch(e => {/* 失敗したらメッセージを表示 */
         commit('displayInformation', e.message);
-        closeInformation(commit);
       });
   },
   updateMenuOrder({ commit }, menus ) {
@@ -34,7 +30,6 @@ export default {
       .updateMenuOrder(menus)/* うまくアップデートできたら何もしない */
       .catch(e => {/* 失敗したらメッセージを表示 */
         commit('displayInformation', e.message);
-        closeInformation(commit);
       });
   },
   saveMenu() {
